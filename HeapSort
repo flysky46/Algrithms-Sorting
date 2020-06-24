@@ -1,0 +1,69 @@
+//This is copied from shree1999, and I still don't understand
+/* This algorithm is based on the sorting technique called head sort
+Time complexity of heapify is O(Log n).
+Time complexity of createAndBuildHeap() is O(n) and
+overall time complexity of Heap Sort is O(n Log n).
+*/
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+void display(int arr[])
+{
+    int n = sizeof(arr)/sizeof(arr[0]);
+    cout<<"Sub Sorting: ";
+    for(int i = 0; i < n; i++) {
+        cout<<arr[i]<<"  ";
+    }
+    cout<<endl;
+}
+void heapify(int arr[], int n, int i)
+{
+    int largest = i; // Initialize largest as root
+    int left = 2*i + 1;
+    int right = 2*i + 2;
+
+    // If left child is larger than root
+    if (left < n && arr[left] > arr[largest])
+        largest = left;
+
+    // If right child is larger than largest so far
+    if (right < n && arr[right] > arr[largest])
+        largest = right;
+
+    if (largest != i)
+    {
+        swap(arr[i], arr[largest]);
+
+        // Recursively heapify the affected sub-tree
+        heapify(arr, n, largest);
+    }
+    display(arr);
+}
+
+
+void heapSort(int arr[], int n) {
+    // to create a heap call heapify
+    for(int i = n/2 - 1; i >= 0; i--) {
+        heapify(arr, n, i);
+    }
+    for(int i = n - 1; i >= 0; i--) {
+        // Move current root to end
+        swap(arr[0], arr[i]);  // swap function is built-in
+
+        // call max heapify on the reduced heap
+        heapify(arr, i, 0);
+    }
+}
+
+int main() {
+    int arr[] = {10, 9, 8, 7, 6, 5, 41, 4, 31, 32, 33, 1};
+    int n = sizeof(arr)/sizeof(arr[0]);
+
+    heapSort(arr, n);
+    cout<<"After Sorting: ";
+    for(int i = 0; i < n; i++) {
+        cout<<arr[i]<<"  ";
+    }
+    return 0;
+}

@@ -1,4 +1,4 @@
-//This is copied from shree1999, and I still don't understand
+//This is copied from shree1999
 /* This algorithm is based on the sorting technique called head sort
 Time complexity of heapify is O(Log n).
 Time complexity of createAndBuildHeap() is O(n) and
@@ -17,13 +17,13 @@ void display(int arr[])
     }
     cout<<endl;
 }
-void heapify(int arr[], int n, int i)
+void heapify(int arr[], int n, int i)   //Make subtree having largest node at its root
 {
-    int largest = i; // Initialize largest as root
-    int left = 2*i + 1;
-    int right = 2*i + 2;
+    int largest = i;        // Initialize largest as root
+    int left = 2*i + 1;     // The leftchild should be 2i+1
+    int right = 2*i + 2;    // The rightchild should be 2i+2
 
-    // If left child is larger than root
+    // If left child is larger than root    //And the location of child should never larger than the size of the array
     if (left < n && arr[left] > arr[largest])
         largest = left;
 
@@ -31,20 +31,24 @@ void heapify(int arr[], int n, int i)
     if (right < n && arr[right] > arr[largest])
         largest = right;
 
-    if (largest != i)
+    if (largest != i)   //i is the original root, and largest should be the new root of the subtree
     {
         swap(arr[i], arr[largest]);
 
         // Recursively heapify the affected sub-tree
-        heapify(arr, n, largest);
+        heapify(arr, n, largest);   //Make sure the root of this tree has the min at its root
     }
-    display(arr);
+    //display(arr);
+    /*cout<<"Root: "<<arr[i];
+    if (left < n)   cout<<" leftchild: "<<arr[left];
+    if (right < n)  cout<<" rightchild: "<<arr[right];
+    cout<<endl;*/
 }
 
 
 void heapSort(int arr[], int n) {
     // to create a heap call heapify
-    for(int i = n/2 - 1; i >= 0; i--) {
+    for(int i = n/2 - 1; i >= 0; i--) { //Each subtree have the largest member at its root 
         heapify(arr, n, i);
     }
     for(int i = n - 1; i >= 0; i--) {

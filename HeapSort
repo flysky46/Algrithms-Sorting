@@ -1,4 +1,6 @@
 //This is copied from shree1999
+//Using the concept of binary tree, use BST to ensure all the root of subtree is largest; 
+//But the relationbetween children is not identified. So we move root, which should be the largest one in array, to last place of array. Recusion these step and make the sorting complete.
 /* This algorithm is based on the sorting technique called head sort
 Time complexity of heapify is O(Log n).
 Time complexity of createAndBuildHeap() is O(n) and
@@ -48,7 +50,7 @@ void heapify(int arr[], int n, int i)   //Make subtree having largest node at it
 
 void heapSort(int arr[], int n) {
     // to create a heap call heapify
-    for(int i = n/2 - 1; i >= 0; i--) { //Each subtree have the largest member at its root 
+    for(int i = n/2 - 1; i >= 0; i--) { //Each subtree have the largest member at its root  //Children of each subtree root will be at least two times.
         heapify(arr, n, i);
     }
     for(int i = n - 1; i >= 0; i--) {
